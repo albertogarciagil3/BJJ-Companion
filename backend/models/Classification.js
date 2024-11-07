@@ -11,7 +11,7 @@ const ClassificationSchema = new mongoose.Schema({
         type: String,
         maxlength: 100
     },
-    customFields: {
+    TechniqueCustomFields: {
         type: Map,
         of: String, // Esto permite agregar pares clave-valor como campos personalizados
         default: {},

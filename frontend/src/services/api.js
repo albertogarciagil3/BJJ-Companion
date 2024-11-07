@@ -3,6 +3,7 @@ import axios from 'axios';
 const api = axios.create({
     baseURL: 'http://localhost:5000',
 });
+console.log('Base URL de API:', api.defaults.baseURL);
 
 // Clasificaciones
 export const getClassifications = async () => {
@@ -260,6 +261,55 @@ export const deleteTechniqueType = async (id) => {
         return response.data;
     } catch (error) {
         console.error('Error eliminando el tipo de técnica:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+};
+
+// Añadir la función para obtener custom fields
+export const getTechniqueCustomFields = async () => {
+    try {
+        const response = await api.get('/custom-fields');
+        return response.data;
+    } catch (error) {
+        console.error('Error al obtener campos personalizados:', error);
+        throw error;
+    }
+};
+
+// Añadir un campo personalizado a TechniqueCustomFields y aplicarlo a todas las técnicas
+export const addTechniqueCustomField = async (name, type, options) => {
+    try {
+        // Log para verificar los datos que se envían
+        console.log("Enviando datos a /custom-fields:", { name, type, options: options || [] });
+
+        const response = await api.post('/custom-fields', { name, type, options: options || [] });
+        return response.data;
+    } catch (error) {
+        console.error('Error al añadir campo personalizado:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+};
+
+
+
+// Eliminar un campo personalizado de TechniqueCustomFields y todas las técnicas
+export const deleteTechniqueCustomField = async (fieldId) => { // Cambiado a `fieldId`
+    try {
+        const response = await api.delete(`/custom-fields/${fieldId}`); // Cambiado a `fieldId`
+        return response.data;
+    } catch (error) {
+        console.error('Error al eliminar campo personalizado:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+};
+
+// Actualizar el valor de un campo personalizado en TechniqueCustomFields
+export const updateTechniqueCustomField = async (fieldId, name, type, options) => { // Añadidos `name`, `type`, `options`
+    try {
+        const response = await api.put(`/custom-fields/${fieldId}`, { name, type, options }); // Cambiado a `fieldId`
+        return response.data;
+    } catch (error) {
+        console.error('Error al actualizar campo personalizado:', error.response ? error.response.data : error.message);
         throw error;
     }
 };

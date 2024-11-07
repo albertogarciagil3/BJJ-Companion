@@ -58,7 +58,7 @@ const PositionSchema = new mongoose.Schema({
         ref: 'Page', // Relación con un documento Page
         required: false
     },
-    customFields: {
+    TechniqueCustomFields: {
         type: Map,
         of: String, // Mapa de campos personalizados (clave-valor) definidos por el usuario
         default: {} // Valor por defecto: un objeto vacío

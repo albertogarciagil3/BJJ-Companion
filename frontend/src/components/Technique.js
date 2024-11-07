@@ -15,7 +15,7 @@ const Technique = ({ technique, updateTechnique, deleteTechnique }) => {
     const [proficiencyLevel, setProficiencyLevel] = useState(technique.proficiencyLevel || 1);
     const [giNoGi, setGiNoGi] = useState(technique.giNoGi || 'both');
     const [practiceToday, setPracticeToday] = useState(technique.practiceToday || false);
-    const [customFields, setCustomFields] = useState(technique.customFields || {});
+    const [TechniqueCustomFields, setTechniqueCustomFields] = useState(technique.TechniqueCustomFields || {});
 
     const handleBlur = () => {
         setIsEditing(false);
@@ -34,7 +34,7 @@ const Technique = ({ technique, updateTechnique, deleteTechnique }) => {
             proficiencyLevel,
             giNoGi,
             practiceToday,
-            customFields
+            TechniqueCustomFields
         });
     };
 
@@ -139,8 +139,8 @@ const Technique = ({ technique, updateTechnique, deleteTechnique }) => {
                         />
                     </label>
                     <textarea
-                        value={JSON.stringify(customFields, null, 2)}
-                        onChange={(e) => setCustomFields(JSON.parse(e.target.value))}
+                        value={JSON.stringify(TechniqueCustomFields, null, 2)}
+                        onChange={(e) => setTechniqueCustomFields(JSON.parse(e.target.value))}
                         onBlur={handleBlur}
                         placeholder="Campos Personalizados (formato JSON)"
                     />
@@ -160,7 +160,7 @@ const Technique = ({ technique, updateTechnique, deleteTechnique }) => {
                     <p><strong>Nivel de Proficiencia:</strong> {proficiencyLevel}</p>
                     <p><strong>Gi/No Gi:</strong> {giNoGi}</p>
                     <p><strong>Practicar Hoy:</strong> {practiceToday ? 'Sí' : 'No'}</p>
-                    <p><strong>Campos Personalizados:</strong> {JSON.stringify(customFields, null, 2)}</p>
+                    <p><strong>Campos Personalizados:</strong> {JSON.stringify(TechniqueCustomFields, null, 2)}</p>
                     <button onClick={() => setIsEditing(true)} style={{ marginRight: '0.5rem' }}>Editar</button>
                     <button onClick={() => deleteTechnique(technique._id)} style={{ color: 'red' }}>Eliminar</button>
                 </>

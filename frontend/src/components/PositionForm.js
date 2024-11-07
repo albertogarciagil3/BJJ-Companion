@@ -14,7 +14,7 @@ const PositionForm = ({ addPosition }) => {
     const [proficiencyLevel, setProficiencyLevel] = useState(1);
     const [giNoGi, setGiNoGi] = useState('both');
     const [entries, setEntries] = useState('');
-    const [customFields, setCustomFields] = useState('{}');
+    const [TechniqueCustomFields, setTechniqueCustomFields] = useState('{}');
     const [classificationsList, setClassificationsList] = useState([]);
     const [parentPositionsList, setParentPositionsList] = useState([]);
     const [dualitiesList, setDualitiesList] = useState([]);
@@ -64,7 +64,7 @@ const PositionForm = ({ addPosition }) => {
             proficiencyLevel,
             giNoGi,
             entries: entries ? entries.split(',').map((entry) => entry.trim()) : [],
-            customFields: customFields !== '' ? JSON.parse(customFields) : {},
+            TechniqueCustomFields: TechniqueCustomFields !== '' ? JSON.parse(TechniqueCustomFields) : {},
         };
 
         try {
@@ -80,7 +80,7 @@ const PositionForm = ({ addPosition }) => {
             setProficiencyLevel(1);
             setGiNoGi('both');
             setEntries('');
-            setCustomFields('{}');
+            setTechniqueCustomFields('{}');
         } catch (error) {
             console.error('Error al agregar la posición:', error);
         }
@@ -222,8 +222,8 @@ const PositionForm = ({ addPosition }) => {
 
                 <label style={styles.label}>Campos Personalizados (JSON):</label>
                 <textarea
-                    value={customFields}
-                    onChange={(e) => setCustomFields(e.target.value)}
+                    value={TechniqueCustomFields}
+                    onChange={(e) => setTechniqueCustomFields(e.target.value)}
                     style={styles.textArea}
                     placeholder='{"campo1": "valor1", "campo2": "valor2"}'
                 />

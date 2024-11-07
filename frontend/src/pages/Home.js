@@ -77,6 +77,7 @@ const Home = () => {
     };
 
     const handleAddTechnique = async (data) => {
+        console.log("handleAddTechnique ejecutado"); // <--- Agrega esto para verificar
         try {
             await createTechnique(data); // Crea la técnica en la base de datos.
             const updatedTechniques = await getTechniques(); // Obtiene las técnicas actualizadas.
